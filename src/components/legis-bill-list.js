@@ -1,7 +1,6 @@
 import React                  from 'react';
 import PropTypes              from 'prop-types';
 import { connect }            from 'react-redux';
-import BillList               from './bill-list.js';
 import VoteList               from './vote-list.js';
 import './legis-bill-list.css';
 
