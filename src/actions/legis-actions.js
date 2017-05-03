@@ -24,7 +24,7 @@ export function doGetLegis(page = 1, limit = 50) {
     return (dispatch, getState) => {
         dispatch(getLegis());
         const { citizen } = getState();
-        const query = citizen.geo.lat
+        const query = Math.abs(citizen.geo.lat)
             ? `&latitude=${citizen.geo.lat}&longitude=${citizen.geo.lon}`
             : `&zip=${citizen.zip}`;
         return fetch(`${API_LEGIS}?page=${page}${query}`)
@@ -35,6 +35,7 @@ export function doGetLegis(page = 1, limit = 50) {
             return response.json();
         })
         .then(body => {
+            body.results.sort((a, b) => a.chamber > b.chamber ? -1 : 1);
             dispatch(successGetLegis(body.results));
         })
         .catch(error => {

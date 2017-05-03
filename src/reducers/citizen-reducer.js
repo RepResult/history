@@ -1,7 +1,7 @@
 import * as types from '../actions/action-types.js';
 
 export const initial = {
-    zip:            60601,
+    zip:            null,
     geo:            { lat: null, lon: null },
     isRequesting:   false,
     error:          false
@@ -15,7 +15,7 @@ export default (state = initial, action) => {
         });
     case types.SUCCESS_GET_CITIZEN_GEO:
         return Object.assign({}, state, {
-            geo:            action.data,
+            geo:            action.data.geo,
             isRequesting:   false
         });
     case types.SUCCESS_GET_CITIZEN_ZIP:

@@ -1,0 +1,25 @@
+.vote {
+    width: 20rem;
+    height: 15rem;
+    margin: 1rem;
+    vertical-align: top;
+    display: inline-block;
+    white-space: normal;
+}
+.vote-cast {
+    text-transform: uppercase;
+}
+.vote-cast.not.voting a {
+    color: grey;
+}
+.vote-cast.nay a,
+.vote-cast.no a {
+    color: orange;
+}
+.vote-cast.aye a,
+.vote-cast.yea a {
+    color: green;
+}
+.vote-title, .vote-datetime {
+    font-family: Baskerville, Garamond, serif;
+}

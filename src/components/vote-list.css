@@ -1,0 +1,4 @@
+.vote-list {
+    white-space: nowrap;
+    overflow-x: auto;
+}

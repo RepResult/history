@@ -33,7 +33,6 @@ export function doGetBills(page = 60, limit = 50) {
         })
         .then(body => {
             dispatch(successGetBills(body.results));
-            body.results.map(b => console.log(b.actions, b.votes, b.upcoming))
         })
         .catch(error => {
             dispatch(errorGetBills({ message: error.toString() }));

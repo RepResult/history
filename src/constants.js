@@ -6,6 +6,8 @@ if (ENV.match(/STAG/)) {
     location.href = 'https:' + location.href.substring(location.protocol.length);
 }
 
+export const API_GEO = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?format=json&benchmark=Public_AR_Current';
 export const API_ROOT  = 'https://congress.api.sunlightfoundation.com';
 export const API_BILLS = API_ROOT + '/bills';
 export const API_LEGIS = API_ROOT + '/legislators/locate';
+export const API_VOTES = API_ROOT + '/votes';

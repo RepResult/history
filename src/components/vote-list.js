@@ -1,26 +1,27 @@
 import React                  from 'react';
 import PropTypes              from 'prop-types';
 import { connect }            from 'react-redux';
-import Bill                   from './bill.js';
+import Vote                   from './vote.js';
+import './vote-list.css';
 
-export class BillList extends React.PureComponent {
+export class VoteList extends React.PureComponent {
 
-    renderBill = (bill) => {
+    renderVote = (vote) => {
         return (
-            <Bill key={bill.bill_id} item={bill} />
+            <Vote key={vote.roll_id} item={vote} legis={this.props.legis} />
         );
     }
 
     render() {
         return (
-            <div className='bill-list'>
-                {this.props.items.map(this.renderBill)}
+            <div className='vote-list'>
+                {this.props.items.map(this.renderVote)}
             </div>
         );
     }
 }
 
-BillList.propTypes = {
+VoteList.propTypes = {
     isRequesting: PropTypes.bool,
     items:        PropTypes.array.isRequired,
     legis:        PropTypes.shape({
@@ -31,8 +32,8 @@ BillList.propTypes = {
 
 function mapStateToProps(state, props) {
     return {
-        isRequesting:  state.bills.isRequesting,
-        items:         state.bills.items
+        isRequesting:  state.votes.isRequesting,
+        items:         state.votes.items
             .filter(b => b.chamber === props.legis.chamber)
     };
 }
@@ -42,4 +43,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BillList);
+export default connect(mapStateToProps, mapDispatchToProps)(VoteList);

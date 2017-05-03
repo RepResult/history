@@ -6,16 +6,12 @@
 .app-header {
   text-align: center;
   background-color: #2222aa;
-  height: 150px;
   padding: 20px;
   color: white;
 }
 
-.app-intro {
-  font-size: large;
-}
-
-@keyframes app-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.app-intro,
+.app-intro legend {
+    text-align: center;
+    display: block;
 }
