@@ -68,15 +68,15 @@ export function doGetVotes(page = 1, limit = 50) {
 export function doGetVoteResult(roll_id, url) {
     return dispatch => {
         dispatch(getVote({ roll_id, url }));
-        return fetch(`http://cors-proxy.htmldriven.com/?url=${url}`)
+        return fetch(`https://crossorigin.me/${url}`)
         .then(response => {
             if (response.status !== 200) {
                 throw new Error('Fetching vote result');
             }
-            return response.json();
+            return response.text();
         })
         .then(resp => {
-            return xmlConvert.xml2json(resp.body, { compact: true });
+            return xmlConvert.xml2json(resp, { compact: true });
         })
         .then(body => {
             return JSON.parse(body);

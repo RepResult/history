@@ -27,7 +27,7 @@ export class Vote extends React.PureComponent {
         if (!vote.results) return '';
         if (vote.results['roll_call_vote']) {
             // senate
-            return vote.results['roll_call_vote']['vote_title']._text;
+            return vote.results['roll_call_vote']['vote_document_text']._text;
         }
         if (vote.results['rollcall-vote']) {
             // house

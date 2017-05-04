@@ -26,15 +26,15 @@ export const errorGetGeo = (data) => {
 export function doGeocode(address) {
     return dispatch => {
         dispatch(getGeo(address));
-        const url = encodeURIComponent(`${API_GEO}&address=${encodeURIComponent(address)}`);
-        return fetch(`http://cors-proxy.htmldriven.com/?url=${url}`)
+        const url = (`${API_GEO}&address=${encodeURIComponent(address)}`);
+        return fetch(`https://crossorigin.me/${url}`)
         .then(response => {
             if (response.status !== 200) {
                 throw new Error('Fetching geocoder');
             }
-            return response.json();
+            return response.text();
         })
-        .then(body => JSON.parse(body.body).result)
+        .then(body => JSON.parse(body).result)
         .then(body => {
             dispatch(successGetGeo({
                 address,
