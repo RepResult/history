@@ -1,7 +1,7 @@
 import fetch            from 'unfetch';
 import * as xmlConvert  from 'xml-js';
 import * as types       from './action-types.js';
-import { API_VOTES }    from '../constants.js';
+import { API_VOTES, PROXY }    from '../constants.js';
 
 export const getVotes = (data) => {
     return {
@@ -57,7 +57,8 @@ export function doGetVotes(page = 1, limit = 50) {
         })
         .then(body => {
             dispatch(successGetVotes(body.results));
-            body.results.map(v => doGetVoteResult(v.roll_id, v.source)(dispatch));
+            body.results.map((v, index) =>
+                setTimeout(doGetVoteResult(v.roll_id, v.source), index * 200, dispatch));
         })
         .catch(error => {
             dispatch(errorGetVotes({ message: error.toString() }));
@@ -68,7 +69,10 @@ export function doGetVotes(page = 1, limit = 50) {
 export function doGetVoteResult(roll_id, url) {
     return dispatch => {
         dispatch(getVote({ roll_id, url }));
-        return fetch(`https://crossorigin.me/${url}`)
+        if (url.match(/senate/)) {
+            url = url.replace('http://', 'https://');
+        }
+        return fetch(`${PROXY}${url}`)
         .then(response => {
             if (response.status !== 200) {
                 throw new Error('Fetching vote result');

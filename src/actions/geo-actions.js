@@ -1,6 +1,6 @@
 import fetch            from 'unfetch';
 import * as types       from './action-types.js';
-import { API_GEO }      from '../constants.js';
+import { API_GEO, PROXY }      from '../constants.js';
 
 export const getGeo = (data) => {
     return {
@@ -27,7 +27,7 @@ export function doGeocode(address) {
     return dispatch => {
         dispatch(getGeo(address));
         const url = (`${API_GEO}&address=${encodeURIComponent(address)}`);
-        return fetch(`https://crossorigin.me/${url}`)
+        return fetch(`${PROXY}${url}`)
         .then(response => {
             if (response.status !== 200) {
                 throw new Error('Fetching geocoder');
